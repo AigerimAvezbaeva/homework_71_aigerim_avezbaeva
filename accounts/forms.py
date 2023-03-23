@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-
+from django.forms import TextInput
 
 
 class LoginForm(forms.Form):
@@ -25,6 +25,9 @@ class CustomUserCreationForm(forms.ModelForm):
         password_confirm = cleaned_data.get('password_confirm')
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Пароли не совпадают!')
+        first_name = cleaned_data.get('first_name')
+        if not first_name:
+            raise forms.ValidationError('Задайте значение для данного поля.')
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -40,3 +43,12 @@ class UserChangeForm(forms.ModelForm):
         model = get_user_model()
         fields = ('first_name', 'last_name', 'email', 'avatar', 'birth_date')
         labels = {'first_name': 'Имя', 'last_name': 'Фамилия', 'email': 'Email'}
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(
+        max_length=100,
+        required=False,
+        label='',
+        widget=TextInput(attrs={'placeholder': 'Поиск'})
+    )
