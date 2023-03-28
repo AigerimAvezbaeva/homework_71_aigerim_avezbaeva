@@ -1,0 +1,28 @@
+[
+{
+    "model": "accounts.account",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$M9CmIN6VjAkmO6qOZeAji5$nEjY2zjARmplFORjezVZtminjlvnV8WPbcZnuZmlxlY=",
+        "last_login": "2023-03-28T03:15:03.844Z",
+        "is_superuser": true,
+        "username": "aaa@aaa.kz",
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-03-27T17:56:51.680Z",
+        "email": "aaa@aaa.kz",
+        "avatar": "",
+        "birth_date": null,
+        "account_info": null,
+        "gender": "male",
+        "phone_number": null,
+        "groups": [],
+        "user_permissions": [],
+        "liked_posts": [],
+        "subscriptions": [],
+        "commented_posts": []
+    }
+}
+]
