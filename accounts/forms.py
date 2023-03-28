@@ -6,8 +6,8 @@ from django.forms import TextInput
 
 
 class LoginForm(forms.Form):
-    email = forms.CharField(required=True, label='Логин')
-    password = forms.CharField(required=True, label='Пароль', widget=forms.PasswordInput)
+    email = forms.CharField(required=True)
+    password = forms.CharField(required=True,  widget=forms.PasswordInput)
 
 
 class CustomUserCreationForm(forms.ModelForm):
