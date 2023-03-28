@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not user.username == '' %}
+        {% include 'posts.html' %}
+    {% endif %}
+{% endblock %}

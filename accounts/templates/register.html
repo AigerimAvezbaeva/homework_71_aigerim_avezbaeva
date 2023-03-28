@@ -1,13 +1,19 @@
 {% extends 'base.html' %}
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
 {% block content %}
+<div class="card" style="margin-top:20px;">
     <form method="post">
-       <div class="form">
-            {% csrf_token %}
-        {% bootstrap_form form %}
-       </div>
-        <div class="form_row">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            {{field.label_tag}}
+            <div class="form-control">{{field}}</div>
+        </div>
+        {% endfor %}
+        <div class="form_row" style="margin-left:10px;">
             {% bootstrap_button button_type="submit" content='Зарегистрироваться' %}
         </div>
     </form>
+</div>
 {% endblock %}

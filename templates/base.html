@@ -1,5 +1,5 @@
 {% load static %}
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% bootstrap_messages %}
@@ -11,17 +11,94 @@
     <title>{% block title %}Blog{% endblock %}</title>
 </head>
 <body>
-<nav class="navbar">
+<main>
+    <nav class="navbar"
+         style="background: linear-gradient(90deg, #FEDA75, #FA7E1E, #D62976, #962FBF, #4F5BD5, #43A047);">
+        <div class="container">
+            <p style="font-size:18px; font-family: fantasy;"><a href="/"><img
+                    src="{% static 'media/logo-instagram.svg' %} " alt="inst" width="35" height="35"></a> Добро
+                пожаловать в инстаграм!</p>
+
+        <div class="pt-2">
+            <div class="search-form d-flex">
+                <form class="d-flex" action="" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Что ищете?" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Найти</button>
+                </form>
+
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="d-flex">
+            <div>
+                <li class="list-unstyled pe-3">
+                    <a href="{% url 'post_create' user.pk %}">
+                        <img src="{% static 'media/add-outline.svg' %}" alt="plus"  width="25" height="25">
+                    </a>
+                </li>
+            </div>
+            <div>
+                <li class="list-unstyled pe-3">
+                    <a href="{% url 'profile' user.pk %}">
+                        <img src="{% static 'media/person-outline.svg' %}" alt="profile"  width="25" height="25">
+                    </a>
+                </li>
+            </div>
+            <div>
+                <li class="list-unstyled pe-2">
+                    <a href="{% url 'logout' %}">
+                        <img src="{% static 'media/log-out.svg' %}" alt="log-out"  width="25" height="25">
+
+                    </a>
+                </li>
+            </div>
+
+            {% else %}
+            <div class="d-flex">
+                <div>
+                    <li class="list-unstyled">
+                        <a href="{% url 'login' %}" class=""
+                           style="font-size:18px; font-family: fantasy; color:white; padding:5px;">Войти</a>
+                    </li>
+                </div>
+                <div>
+                    <li class="list-unstyled">
+                        <a href="{% url 'register' %}" class=""
+                           style="font-size:18px; font-family: fantasy; color:white; padding:5px;">
+                            Зарегистрироваться
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+            </div>
+    </nav>
     <div class="container">
-        <ul class="menu">
-            <li>
-                <a href="/" class="btn btn-primary">Home</a>
-            </li>
-        </ul>
+        {% block content %}{% endblock %}
     </div>
-</nav>
-<div class="container">
-    {% block content %}{% endblock %}
-</div>
+</main>
+<footer style="height: 120px; font-size: 12px;" class="text-secondary text-center border-top">
+    <div class="container">
+        <p class="pt-4">
+            Meta
+            Информация
+            Блог
+            Вакансии
+            Помощь
+            API
+            Конфиденциальность
+            Условия
+            Популярные аккаунты
+            Хэштеги
+            Места
+            Instagram Lite
+            Загрузка контактов и лица, не являющиеся пользователями
+            Русский
+            © 2022 Instagram from Meta
+        </p>
+    </div>
+</footer>
 </body>
 </html>
