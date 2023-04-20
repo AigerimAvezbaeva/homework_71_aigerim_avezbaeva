@@ -21,14 +21,15 @@
 
         <div class="pt-2">
             <div class="search-form d-flex">
-                <form class="d-flex" action="" method="get">
-                    <input class="form-control me-2" type="search" placeholder="Что ищете?" aria-label="Search">
+                <form class="d-flex" action="{% url 'profiles' %}" method="GET">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Что ищете?" aria-label="Search">
                     <button class="btn btn-outline-light" type="submit">Найти</button>
                 </form>
 
             </div>
         </div>
         {% if user.is_authenticated %}
+            {% block menu_links %} {% endblock %}
         <div class="d-flex">
             <div>
                 <li class="list-unstyled pe-3">

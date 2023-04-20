@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, UpdateView
 
@@ -20,6 +20,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
+            if not post.image:
+                form.add_error('image', 'Необходимо добавить фото!')
+                return render(request, 'add_post.html', {'form': form})
             post.save()
             return redirect('index')
         context = {}

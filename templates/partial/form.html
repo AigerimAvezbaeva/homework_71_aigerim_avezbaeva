@@ -1,9 +1,8 @@
-{% extends 'base.html' %}
+{% csrf_token %}
+{% load static %}
 {% load bootstrap5 %}
-{% bootstrap_css %}
-{% block content %}
 <div class="card" style="margin-top:20px;">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
         {% csrf_token %}
         {% for field in form %}
         <div class="form-group">
@@ -18,9 +17,5 @@
         {% endfor %}
         {% endif %}
         {% endfor %}
-        <div class="form_row" style="margin-left:10px;">
-            {% bootstrap_button button_type="submit" content='Зарегистрироваться' %}
-        </div>
     </form>
 </div>
-{% endblock %}

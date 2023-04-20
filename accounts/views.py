@@ -16,6 +16,7 @@ class LoginView(TemplateView):
     template_name = 'login.html'
     form = LoginForm
 
+
     def get(self, request, *args, **kwargs):
         next = request.GET.get('next')
         form_data = {} if not next else {'next': next}
@@ -25,6 +26,7 @@ class LoginView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form(request.POST)
+
         if not form.is_valid():
             return redirect('login')
         login_name = form.cleaned_data.get('login')
@@ -52,10 +54,12 @@ class RegisterView(CreateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        print(form)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.login
             user.save()
+            print(user)
             login(request, user)
             return redirect('index')
         context = {}
@@ -123,8 +127,7 @@ class ProfilesView(ListView):
         queryset = super().get_queryset().all()
         print(queryset)
         if self.search_value:
-            query = Q(email__icontains=self.search_value) | Q(login__icontains=self.search_value) | Q(
-                first_name__icontains=self.search_value)
+            query = Q(login__icontains=self.search_value) | Q(email__icontains=self.search_value)
             queryset = queryset.filter(query)
         return queryset
 

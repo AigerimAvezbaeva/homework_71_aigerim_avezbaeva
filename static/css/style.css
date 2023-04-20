@@ -82,3 +82,9 @@ footer {
   height: 50px;
   background-color: #f5f5f5;
 }
+.comments{
+   box-sizing: border-box;
+  padding: 5px;
+  margin: 5px;
+  border: 0.5px solid grey;
+}

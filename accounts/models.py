@@ -12,25 +12,21 @@ class GenderChoices(TextChoices):
 
 
 class Account(AbstractUser):
-    email = models.EmailField(verbose_name='Электронная почта', unique=True, blank=True)
-
+    login = models.CharField(verbose_name='Логин', unique=True, null=False, blank=False, max_length=150)
+    email = models.EmailField(verbose_name='Электронная почта', unique=True, null=False, blank=False)
     avatar = models.ImageField(
         null=True,
         blank=True,
         upload_to='user_pic',
         verbose_name='Аватар'
     )
-    birth_date = models.DateField(
+    user_info = models.TextField(
+        verbose_name='Информация о пользователе',
         null=True,
         blank=True,
-        verbose_name='Дата рождения'
+        max_length=2000
     )
-    account_info = models.CharField(
-        max_length=100,
-        verbose_name='Описание профиля',
-        null=True,
-        blank=True
-    )
+
     gender = models.CharField(
         choices=GenderChoices.choices,
         default=GenderChoices.MALE,
@@ -39,7 +35,7 @@ class Account(AbstractUser):
         blank=True,
         max_length=20
     )
-    phone_number = models.CharField(
+    phone = models.CharField(
         verbose_name='Номер телефона',
         null=True,
         blank=True,
@@ -58,8 +54,9 @@ class Account(AbstractUser):
         related_name='user_comments'
     )
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    USERNAME_FIELD = 'login'
+    EMAIL_FIELD = 'email'
+    REQUIRED_FIELDS = ['email']
 
     object = UserManager()
 

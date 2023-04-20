@@ -20,7 +20,7 @@
                         </div>
                     {% else %}
                         <div>
-                            <img src="{% static "profile/empty.png" %}" alt="" style="height: 35px; width: 35px;"
+                            <img src="{% static 'media/person-outline.svg' %}" alt="" style="height: 35px; width: 35px;"
                                  class="me-3 rounded-circle">
                         </div>
                     {% endif %}
@@ -54,8 +54,8 @@
                         <input type="hidden" name="like" value="{{ post.pk }}">
                         <input type="submit" value=""
                                style="background-image: url('{% static 'media/like.png' %}'); background-size: contain;
-                                       background-repeat: no-repeat; width: 100px; height: 35px;"
-                               class="border-0 bg-white">
+                                       background-repeat: no-repeat; width: 39px; height: 32px;"
+                               class="border-0">
                     </form>
                 {% else %}
                     <form action="" method="get">
@@ -74,14 +74,15 @@
 
                 <form action="{% url 'add_comment' user.pk post.pk %}" method="post" style="margin-bottom: 30px;">
                     {% csrf_token %}
-                    <p style="height: 85px;" class="mb-0">
+                    <p style="" class="">
                         {% for field in comment_form %}
-                            <label class="align-top">{{ field.label }}</label>
+                        <div class="comments">
                             {{ field }}
+                        </div>
                         {% endfor %}
                         <input type="submit" value="Опубликовать"
-                               class="border-0 bg-white text-info fw-bold rounded align-middle"
-                               style="margin-left: -130px; margin-bottom: 100px;">
+                               class="btn btn-primary"
+                               style="">
                     </p>
                 </form>
 
